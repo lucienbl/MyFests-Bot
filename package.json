@@ -1,0 +1,55 @@
+{
+  "name": "myfests-bot",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">= 12.13 <13"
+  },
+  "scripts": {
+    "start:watch": "ts-node-dev src/main.ts",
+    "clean": "rimraf coverage build tmp",
+    "build": "tsc -p tsconfig.release.json",
+    "obfuscate": "javascript-obfuscator ./build --output ./",
+    "build:watch": "tsc -w -p tsconfig.release.json",
+    "lint": "eslint . --ext .ts,.tsx",
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "@nestjs/common": "^7.4.1",
+    "@nestjs/core": "^7.4.1",
+    "@nestjs/passport": "^7.1.0",
+    "@nestjs/platform-express": "^7.4.1",
+    "@nestjs/swagger": "^4.5.12",
+    "discord.js": "^12.2.0",
+    "dotenv": "^8.2.0",
+    "events": "^3.2.0",
+    "express-rate-limit": "^5.1.3",
+    "moment": "^2.27.0",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "reflect-metadata": "^0.1.13",
+    "sqlite3": "^5.0.0",
+    "swagger-ui-express": "^4.1.4",
+    "tslib": "~2.0.0",
+    "tsyringe": "^4.3.0",
+    "typeorm": "^0.2.25"
+  },
+  "devDependencies": {
+    "@types/jest": "~26.0.0",
+    "@types/node": "~12.12.47",
+    "@types/passport-local": "^1.0.33",
+    "@typescript-eslint/eslint-plugin": "~3.2.0",
+    "@typescript-eslint/parser": "~3.2.0",
+    "eslint": "~7.2.0",
+    "eslint-config-prettier": "~6.11.0",
+    "eslint-plugin-jest": "~23.13.2",
+    "javascript-obfuscator": "^1.8.1",
+    "jest": "~26.0.1",
+    "prettier": "~2.0.5",
+    "rimraf": "~3.0.2",
+    "ts-jest": "~26.1.0",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "tsutils": "~3.17.0",
+    "typescript": "~3.9.4"
+  }
+}

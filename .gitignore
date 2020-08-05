@@ -1,0 +1,14 @@
+# Node.JS
+node_modules
+
+# Secrets
+.env
+
+# Build
+build
+
+# MacOS
+.DS_Store
+
+# db data
+data
