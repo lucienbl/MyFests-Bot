@@ -34,7 +34,7 @@ export class CommunityService {
     await channel.send(new MessageEmbed({
       title: `NEW MEDIA: ${newMediaDto.parent} > ${newMediaDto.title}`,
       description: `By ${newMediaDto.author}\n\n${newMediaDto.link}`,
-      color: "#fcc203"
+      color: newMediaDto.color
     }).setThumbnail(newMediaDto.thumbnailUrl));
 
     return newMediaDto;
@@ -45,7 +45,7 @@ export class CommunityService {
     await channel.send(new MessageEmbed({
       title: `NEW EVENT: ${newEventDto.parent} > ${newEventDto.title}`,
       description: `By ${newEventDto.author}\n\n${newEventDto.link}`,
-      color: "#fcc203"
+      color: newEventDto.color
     }).setThumbnail(newEventDto.thumbnailUrl));
 
     return newEventDto;

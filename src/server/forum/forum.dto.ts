@@ -35,4 +35,7 @@ export class NewThreadDto {
 
   @ApiProperty()
   thumbnailUrl: string;
+
+  @ApiProperty()
+  color?: string = "#fcc203";
 }

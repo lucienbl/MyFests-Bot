@@ -34,7 +34,7 @@ export class ForumService {
     await channel.send(new MessageEmbed({
       title: `NEW THREAD: ${newThreadDto.parent} > ${newThreadDto.title}`,
       description: `By ${newThreadDto.author}\n\n${newThreadDto.link}`,
-      color: "#fcc203"
+      color: newThreadDto.color
     }).setThumbnail(newThreadDto.thumbnailUrl));
 
     return newThreadDto;

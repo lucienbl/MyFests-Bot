@@ -35,6 +35,9 @@ export class NewMediaDto {
 
   @ApiProperty()
   thumbnailUrl: string;
+
+  @ApiProperty()
+  color?: string = "#fcc203";
 }
 
 /**
@@ -55,4 +58,7 @@ export class NewEventDto {
 
   @ApiProperty()
   thumbnailUrl: string;
+
+  @ApiProperty()
+  color?: string = "#fcc203";
 }
