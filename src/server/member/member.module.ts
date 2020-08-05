@@ -16,14 +16,11 @@
  */
 
 import { Module } from '@nestjs/common';
-import { BotModule } from './bot/bot.module';
-import { ForumModule } from './forum/forum.module';
-import { CommunityModule } from './community/community.module';
-import { MemberModule } from './member/member.module';
+import { MemberController } from './member.controller';
+import { MemberService } from './member.service';
 
 @Module({
-  imports: [BotModule, ForumModule, CommunityModule, MemberModule],
-  providers: [],
-  controllers: [],
+  controllers: [MemberController],
+  providers: [MemberService]
 })
-export class AppModule {}
+export class MemberModule {}

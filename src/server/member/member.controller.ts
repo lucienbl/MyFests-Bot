@@ -15,15 +15,25 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Module } from '@nestjs/common';
-import { BotModule } from './bot/bot.module';
-import { ForumModule } from './forum/forum.module';
-import { CommunityModule } from './community/community.module';
-import { MemberModule } from './member/member.module';
+import { Controller, UseGuards, Post, Body } from '@nestjs/common';
+import { ApiTags, ApiBasicAuth, ApiResponse } from '@nestjs/swagger';
+import { AuthGuard } from '../auth.guard';
+import { MemberService } from './member.service';
+import { VerifiedMemberDto } from './member.dto';
 
-@Module({
-  imports: [BotModule, ForumModule, CommunityModule, MemberModule],
-  providers: [],
-  controllers: [],
-})
-export class AppModule {}
+@ApiTags("Member")
+@ApiBasicAuth()
+@UseGuards(AuthGuard)
+@Controller('member')
+export class MemberController {
+
+  constructor(
+    private readonly memberService: MemberService
+  ) {}
+
+  @Post("verified")
+  @ApiResponse({ type: VerifiedMemberDto })
+  verifyMember(@Body() verifiedMemberDto: VerifiedMemberDto): Promise<VerifiedMemberDto> {
+    return this.memberService.verifiedMember(verifiedMemberDto);
+  }
+}

@@ -15,15 +15,15 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Module } from '@nestjs/common';
-import { BotModule } from './bot/bot.module';
-import { ForumModule } from './forum/forum.module';
-import { CommunityModule } from './community/community.module';
-import { MemberModule } from './member/member.module';
+import { ApiProperty } from "@nestjs/swagger";
 
-@Module({
-  imports: [BotModule, ForumModule, CommunityModule, MemberModule],
-  providers: [],
-  controllers: [],
-})
-export class AppModule {}
+/**
+ * Verified member
+ */
+export class VerifiedMemberDto {
+  @ApiProperty()
+  discordUserId: string;
+
+  @ApiProperty()
+  isVerified?: boolean = true;
+}
