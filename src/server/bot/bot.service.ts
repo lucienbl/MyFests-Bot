@@ -15,24 +15,20 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Controller, Get, UseGuards } from '@nestjs/common';
-import { ApiTags, ApiBasicAuth } from '@nestjs/swagger';
-import { VerificationService } from './verification.service';
-import { AuthGuard } from '../auth.guard';
+import { Injectable } from '@nestjs/common';
+import { Client } from 'discord.js';
+import { container } from 'tsyringe';
 
-@ApiTags("Verification")
-@ApiBasicAuth()
-@UseGuards(AuthGuard)
-@Controller('verification')
-export class VerificationController {
+@Injectable()
+export class BotService {
 
-  constructor(
-    private readonly verificationService: VerificationService
-  ) {}
-
-  @Get()
-  getAll() {
-    return this.verificationService.verification();
+  _client: Client;
+  
+  constructor() {
+    this._client = container.resolve(Client);
   }
 
+  async getBotInformation() {
+    return this._client.user.toJSON();
+  } 
 }

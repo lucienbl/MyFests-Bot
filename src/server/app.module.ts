@@ -16,12 +16,12 @@
  */
 
 import { Module } from '@nestjs/common';
-import { VerificationModule } from './verification/verification.module';
+import { BotModule } from './bot/bot.module';
 import { ForumModule } from './forum/forum.module';
 import { CommunityModule } from './community/community.module';
 
 @Module({
-  imports: [VerificationModule, ForumModule, CommunityModule],
+  imports: [BotModule, ForumModule, CommunityModule],
   providers: [],
   controllers: [],
 })

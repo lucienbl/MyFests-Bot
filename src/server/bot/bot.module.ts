@@ -16,11 +16,11 @@
  */
 
 import { Module } from '@nestjs/common';
-import { VerificationController } from './verification.controller';
-import { VerificationService } from './verification.service';
+import { BotController } from './bot.controller';
+import { BotService } from './bot.service';
 
 @Module({
-  controllers: [VerificationController],
-  providers: [VerificationService]
+  controllers: [BotController],
+  providers: [BotService]
 })
-export class VerificationModule {}
+export class BotModule {}
