@@ -20,7 +20,7 @@ import "reflect-metadata";
 import { container } from 'tsyringe';
 import { createConnection, Connection } from "typeorm";
 import { Logger } from "./utils";
-import { MessageDispatcher, MessageReactionAddDispatcher, MessageReactionRemoveDispatcher, ReadyDispatcher } from './core';
+import { MessageDispatcher, MessageReactionAddDispatcher, MessageReactionRemoveDispatcher, ReadyDispatcher, LogManager } from './core';
 import { Server } from "./server";
 import { ReactionRole } from './db';
 
@@ -54,6 +54,9 @@ createConnection({
   // setup client & db DIs
   container.registerInstance<Client>(Client, client);
   container.registerInstance<Connection>(Connection, connection);
+
+  // start log manager
+  LogManager.start();
 
   // start rest server
   await Server.start();

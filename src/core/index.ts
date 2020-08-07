@@ -19,10 +19,12 @@ import MessageDispatcher from "./MessageDispatcher";
 import MessageReactionAddDispatcher from "./MessageReactionAddDispatcher";
 import MessageReactionRemoveDispatcher from "./MessageReactionRemoveDispatcher";
 import ReadyDispatcher from "./ReadyDispatcher";
+import LogManager from "./LogManager";
 
 export {
   MessageDispatcher,
   MessageReactionAddDispatcher,
   MessageReactionRemoveDispatcher,
-  ReadyDispatcher
+  ReadyDispatcher,
+  LogManager
 }
