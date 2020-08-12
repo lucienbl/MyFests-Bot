@@ -18,7 +18,7 @@
 import { Injectable } from '@nestjs/common';
 import { Client, TextChannel, MessageEmbed } from 'discord.js';
 import { container } from 'tsyringe';
-import { NewMediaDto, NewEventDto } from './community.dto';
+import { NewMediaDto, NewEventDto, NewRadioDto } from './community.dto';
 
 @Injectable()
 export class CommunityService {
@@ -49,5 +49,16 @@ export class CommunityService {
     }).setThumbnail(newEventDto.thumbnailUrl));
 
     return newEventDto;
+  } 
+
+  async newRadio(newRadioDto: NewRadioDto): Promise<NewRadioDto> {
+    const channel = <TextChannel>this._client.channels.resolve(process.env.COMMUNITY_UPDATES_CHANNEL_ID);
+    await channel.send(new MessageEmbed({
+      title: `NEW RADIO SLOT: ${newRadioDto.title}`,
+      description: `By ${newRadioDto.author}\n\n${newRadioDto.link}`,
+      color: newRadioDto.color
+    }).setThumbnail(newRadioDto.thumbnailUrl));
+
+    return newRadioDto;
   } 
 }

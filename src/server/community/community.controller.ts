@@ -18,7 +18,7 @@
 import { Controller, UseGuards, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiBasicAuth, ApiResponse } from '@nestjs/swagger';
 import { AuthGuard } from '../auth.guard';
-import { NewMediaDto, NewEventDto } from './community.dto';
+import { NewMediaDto, NewEventDto, NewRadioDto } from './community.dto';
 import { CommunityService } from './community.service';
 
 @ApiTags("Community")
@@ -41,5 +41,11 @@ export class CommunityController {
   @ApiResponse({ type: NewEventDto })
   newEvent(@Body() newEventDto: NewEventDto): Promise<NewEventDto> {
     return this.communityService.newEvent(newEventDto);
+  }
+
+  @Post("radio")
+  @ApiResponse({ type: NewRadioDto })
+  newRadio(@Body() newRadioDto: NewRadioDto): Promise<NewRadioDto> {
+    return this.communityService.newRadio(newRadioDto);
   }
 }

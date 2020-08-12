@@ -62,3 +62,23 @@ export class NewEventDto {
   @ApiProperty()
   color?: string = "#fcc203";
 }
+
+/**
+ * New radio
+ */
+export class NewRadioDto {
+  @ApiProperty()
+  title: string;
+
+  @ApiProperty()
+  author: string;
+
+  @ApiProperty()
+  link: string;
+
+  @ApiProperty()
+  thumbnailUrl: string;
+
+  @ApiProperty()
+  color?: string = "#fcc203";
+}
