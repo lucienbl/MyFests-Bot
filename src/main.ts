@@ -20,7 +20,7 @@ import "reflect-metadata";
 import { container } from 'tsyringe';
 import { createConnection, Connection } from "typeorm";
 import { Logger } from "./utils";
-import { MessageDispatcher, MessageReactionAddDispatcher, MessageReactionRemoveDispatcher, ReadyDispatcher, LogManager } from './core';
+import { MessageDispatcher, MessageReactionAddDispatcher, MessageReactionRemoveDispatcher, ReadyDispatcher, LogManager, GuildMemberAddDispatcher } from './core';
 import { Server } from "./server";
 import { ReactionRole } from './db';
 
@@ -47,6 +47,7 @@ createConnection({
   client.on('messageReactionAdd', MessageReactionAddDispatcher.dispatch);
   client.on('messageReactionRemove', MessageReactionRemoveDispatcher.dispatch);
   client.on('ready', ReadyDispatcher.dispatch);
+  client.on('guildMemberAdd', GuildMemberAddDispatcher.dispatch);
 
   // login client
   client.login(process.env.BOT_TOKEN).then(() => Logger.info(`Logged in as ${client.user.tag} !`));
