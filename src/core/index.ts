@@ -20,11 +20,17 @@ import MessageReactionAddDispatcher from "./MessageReactionAddDispatcher";
 import MessageReactionRemoveDispatcher from "./MessageReactionRemoveDispatcher";
 import ReadyDispatcher from "./ReadyDispatcher";
 import LogManager from "./LogManager";
+import MemberVerificationManager from "./MemberVerificationManager";
+import GuildMemberAddDispatcher from "./GuildMemberAddDispatcher";
+import ApiClient from "./ApiClient";
 
 export {
   MessageDispatcher,
   MessageReactionAddDispatcher,
   MessageReactionRemoveDispatcher,
   ReadyDispatcher,
-  LogManager
+  LogManager,
+  MemberVerificationManager,
+  GuildMemberAddDispatcher,
+  ApiClient
 }

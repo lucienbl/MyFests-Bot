@@ -15,10 +15,17 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Logger from "./Logger";
-import superagent from './superagent';
+import { superagent } from '../utils';
 
-export {
-  Logger,
-  superagent
+class ApiClient {
+  static validateDiscordId(discordId: string): Promise<any> {
+    return superagent
+      .get(`${this._baseUrl()}&REQUEST=authentication&DATA=${discordId}`)
+  }
+
+  static _baseUrl() {
+    return `${process.env.HABBO_BASE_API_URL}?API=${process.env.HABBO_APP_ID}&KEY=${process.env.HABBO_API_KEY}`;
+  }
 }
+
+export default ApiClient;

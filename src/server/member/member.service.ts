@@ -19,6 +19,7 @@ import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { Client } from 'discord.js';
 import { container } from 'tsyringe';
 import { VerifiedMemberDto } from './member.dto';
+import { MemberVerificationManager } from '../../core';
 
 @Injectable()
 export class MemberService {
@@ -35,11 +36,7 @@ export class MemberService {
 
     if (!member) throw new InternalServerErrorException(`Unknown member for ID ${verifiedMemberDto.discordUserId} !`);
 
-    if (verifiedMemberDto.isVerified) {
-      await member.roles.remove(process.env.UNVERIFIED_ROLE_ID);
-    } else {
-      await member.roles.add(process.env.UNVERIFIED_ROLE_ID);
-    }
+    MemberVerificationManager.verify(verifiedMemberDto.isVerified, member);
 
     return verifiedMemberDto;
   } 

@@ -15,10 +15,4 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Logger from "./Logger";
-import superagent from './superagent';
-
-export {
-  Logger,
-  superagent
-}
+export default require('superagent-promise')(require('superagent'), Promise);
