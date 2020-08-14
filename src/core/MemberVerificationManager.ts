@@ -36,7 +36,7 @@ class MemberVerificationManager {
       await member.roles.remove(process.env.UNVERIFIED_ROLE_ID);
       this._send(new MessageEmbed({
         title: "New HabboFester!",
-        description: `Please welcome <@${member.id}>to the HabboFests public discord! 💖`,
+        description: `Please welcome <@${member.id}> to the HabboFests public discord! 💖`,
         color: "#FF8800"
       }).setFooter('Want to join the staff team? Check out #job-rallying!').setThumbnail(member.user.displayAvatarURL()));
     } else {
