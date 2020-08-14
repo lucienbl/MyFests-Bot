@@ -15,7 +15,7 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Client, Message, GuildMember, MessageEmbed, TextChannel, Role, Channel, User, Guild } from "discord.js";
+import { Client, Message, GuildMember, MessageEmbed, TextChannel, Role, Channel, User, Guild, VoiceState } from "discord.js";
 import { container } from 'tsyringe';
 
 class LogManager {
@@ -42,6 +42,7 @@ class LogManager {
     this._client.on('channelCreate', this._onChannelCreate);
     this._client.on('channelDelete', this._onChannelDelete);
     this._client.on('guildBanAdd', this._onGuildBanAdd);
+    this._client.on('voiceStateUpdate', this._onVoiceStateUpdate);
   }
 
   private _send = async (embed: MessageEmbed) => (<TextChannel>await this._client.channels.fetch(process.env.LOG_CHANNEL_ID)).send(embed);
@@ -68,11 +69,11 @@ class LogManager {
       fields: [
         {
           name: 'Now',
-          value: currentGuildMember.toString()
+          value: '```json\n' + JSON.stringify(currentGuildMember.toJSON(), null, 2) + '```'
         },
         {
           name: 'Previous',
-          value: previousGuildMember.toString()
+          value: '```json\n' + JSON.stringify(previousGuildMember.toString(), null, 2) + '```'
         }
       ],
       timestamp: Date.now()
@@ -131,11 +132,11 @@ class LogManager {
       fields: [
         {
           name: 'Now',
-          value: previousRole.toString()
+          value: '```json\n' + JSON.stringify(previousRole.toJSON(), null, 2) + '```'
         },
         {
           name: 'Previous',
-          value: currentRole.toString()
+          value: '```json\n' + JSON.stringify(currentRole.toJSON(), null, 2) + '```'
         }
       ],
       timestamp: Date.now()
@@ -162,6 +163,23 @@ class LogManager {
     return this._send(new MessageEmbed({
       title: "Guild Ban Add",
       description: user.toString(),
+      timestamp: Date.now()
+    }));
+  };
+
+  private _onVoiceStateUpdate = (previousVoiceState: VoiceState, currentVoiceState: VoiceState) => {
+    return this._send(new MessageEmbed({
+      title: "Voice State Update",
+      fields: [
+        {
+          name: 'Now',
+          value: '```json\n' + JSON.stringify(previousVoiceState.toJSON(), null, 2) + '```'
+        },
+        {
+          name: 'Previous',
+          value: '```json\n' + JSON.stringify(currentVoiceState.toJSON(), null, 2) + '```'
+        }
+      ],
       timestamp: Date.now()
     }));
   };
