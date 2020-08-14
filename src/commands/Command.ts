@@ -63,7 +63,11 @@ class Command {
   }
 
   get usage(): string {
-    return `${process.env.BOT_PREFIX}${this._options.command} ${this._options.args.map(arg => !arg.required ? `[${arg.key}]` : arg.key).join(' ')}`;
+    return `${process.env.BOT_PREFIX}${this._options.command}${this._options.args ? " " + this._options.args.map(arg => !arg.required ? `[${arg.key}]` : `<${arg.key}>`).join(' ') : ""}`;
+  }
+
+  get description(): string {
+    return this._options.description;
   }
 
   handle = async () => {
