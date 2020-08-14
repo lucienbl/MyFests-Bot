@@ -1,0 +1,11 @@
+{
+  "sqltools.connections": [
+    {
+      "database": "${workspaceFolder:MyFest-Bot}/data/db.sqlite",
+      "driver": "SQLite",
+      "name": "HabboFests",
+      "previewLimit": 50
+    }
+  ],
+  "sqltools.useNodeRuntime": true
+}

@@ -73,7 +73,7 @@ class LogManager {
         },
         {
           name: 'Previous',
-          value: '```json\n' + JSON.stringify(previousGuildMember.toString(), null, 2) + '```'
+          value: '```json\n' + JSON.stringify(previousGuildMember.toJSON(), null, 2) + '```'
         }
       ],
       timestamp: Date.now()
