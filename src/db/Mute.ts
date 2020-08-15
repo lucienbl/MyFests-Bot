@@ -15,17 +15,23 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { PingCommand } from "./Utils";
-import { AnnounceCommand } from "./Common";
-import { ReactionRoleAddCommand, ReactionRoleListCommand } from "./ReactionRoles";
-import { MuteCommand, UnmuteCommand, MutedCommand } from "./Moderation";
+import { Entity, Column, CreateDateColumn, PrimaryGeneratedColumn } from "typeorm";
 
-export {
-  PingCommand,
-  AnnounceCommand,
-  ReactionRoleAddCommand,
-  ReactionRoleListCommand,
-  MuteCommand,
-  UnmuteCommand,
-  MutedCommand
+@Entity()
+export default class Mute {
+
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
+
+    @Column({ unique: true })
+    discordUserId: string;
+
+    @Column({ nullable: true })
+    reason: string;
+
+    @Column({ nullable: true })
+    untilDate: Date;
+
+    @CreateDateColumn()
+    createdAt: Date;
 }

@@ -16,7 +16,9 @@
  */
 
 import ReactionRole from "./ReactionRole";
+import Mute from "./Mute";
 
 export {
-  ReactionRole
+  ReactionRole,
+  Mute
 }

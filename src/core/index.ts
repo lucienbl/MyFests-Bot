@@ -23,6 +23,7 @@ import LogManager from "./LogManager";
 import MemberVerificationManager from "./MemberVerificationManager";
 import GuildMemberAddDispatcher from "./GuildMemberAddDispatcher";
 import ApiClient from "./ApiClient";
+import MuteManager from "./MuteManager";
 
 export {
   MessageDispatcher,
@@ -32,5 +33,6 @@ export {
   LogManager,
   MemberVerificationManager,
   GuildMemberAddDispatcher,
-  ApiClient
+  ApiClient,
+  MuteManager
 }

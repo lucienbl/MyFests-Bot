@@ -79,6 +79,8 @@ class Command {
         }
       }
     }
+
+    // TODO check if authorized
   
     return this.handler();
   }

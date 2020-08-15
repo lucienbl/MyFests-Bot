@@ -20,9 +20,9 @@ import "reflect-metadata";
 import { container } from 'tsyringe';
 import { createConnection, Connection } from "typeorm";
 import { Logger } from "./utils";
-import { MessageDispatcher, MessageReactionAddDispatcher, MessageReactionRemoveDispatcher, ReadyDispatcher, LogManager, GuildMemberAddDispatcher } from './core';
+import { MessageDispatcher, MessageReactionAddDispatcher, MessageReactionRemoveDispatcher, ReadyDispatcher, LogManager, GuildMemberAddDispatcher, MuteManager } from './core';
 import { Server } from "./server";
-import { ReactionRole } from './db';
+import { ReactionRole, Mute } from './db';
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
@@ -35,6 +35,7 @@ createConnection({
   database: `./data/db.sqlite`,
   entities: [
     ReactionRole,
+    Mute
   ],
   synchronize: true,
   logging: true
@@ -56,8 +57,9 @@ createConnection({
   container.registerInstance<Client>(Client, client);
   container.registerInstance<Connection>(Connection, connection);
 
-  // start log manager
+  // start managers
   LogManager.start();
+  MuteManager.start();
 
   // start rest server
   await Server.start();

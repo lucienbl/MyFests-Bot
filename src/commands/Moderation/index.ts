@@ -15,16 +15,11 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { PingCommand } from "./Utils";
-import { AnnounceCommand } from "./Common";
-import { ReactionRoleAddCommand, ReactionRoleListCommand } from "./ReactionRoles";
-import { MuteCommand, UnmuteCommand, MutedCommand } from "./Moderation";
+import MuteCommand from "./MuteCommand";
+import UnmuteCommand from "./UnmuteCommand";
+import MutedCommand from "./MutedCommand";
 
 export {
-  PingCommand,
-  AnnounceCommand,
-  ReactionRoleAddCommand,
-  ReactionRoleListCommand,
   MuteCommand,
   UnmuteCommand,
   MutedCommand
