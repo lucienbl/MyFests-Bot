@@ -85,6 +85,8 @@ class LogManager {
         timestamp: Date.now()
       }));
     }
+    
+    return null;
   };
 
   private _onMessageUpdate = (previousMessage: Message, currentMessage: Message) => {
@@ -190,7 +192,7 @@ class LogManager {
     if (previousVoiceState.channelID && !currentVoiceState.channelID) description = `<@!${currentVoiceState.member.id}> left the voice channel ${previousVoiceState.channel.name} !`;
     if (!previousVoiceState.channelID && currentVoiceState.channelID) description = `<@!${currentVoiceState.member.id}> joined the voice channel ${previousVoiceState.channel.name} !`;
     if (!description) return null;
-    
+
     return this._send(new MessageEmbed({
       author: {
         name: currentVoiceState.member.user.tag,
