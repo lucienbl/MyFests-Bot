@@ -15,7 +15,7 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Client, TextChannel } from 'discord.js';
+import { Client, TextChannel, GuildChannel } from 'discord.js';
 import { Repository, Connection } from 'typeorm';
 import { container } from 'tsyringe';
 import { ReactionRole } from '../db';
@@ -46,6 +46,15 @@ class ReadyDispatcher {
       (<TextChannel>await this._client.channels.fetch(roleReaction.channelId)).messages.fetch(roleReaction.messageId);
     });
     Logger.info("Cached all needed messages !");
+
+    // deny muted to talk in channels
+    this._client.channels.cache.forEach(async (channel: GuildChannel) => {
+      await channel.createOverwrite(process.env.MUTED_ROLE_ID, {
+        SEND_MESSAGES: false,
+        SPEAK: false
+      }, `Deny muted role to speak / write in #${channel.name}.`);
+    });
+    Logger.info("Denied @Muted to talk in all channels.");
   }
 }
 
