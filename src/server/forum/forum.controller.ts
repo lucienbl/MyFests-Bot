@@ -42,4 +42,10 @@ export class ForumController {
   newLog(@Body() newLogDto: NewLogDto): Promise<NewLogDto> {
     return this.forumService.newLog(newLogDto);
   }
+
+  @Post("adminlog")
+  @ApiResponse({ type: NewLogDto })
+  newAdminLog(@Body() newLogDto: NewLogDto): Promise<NewLogDto> {
+    return this.forumService.newAdminLog(newLogDto);
+  }
 }

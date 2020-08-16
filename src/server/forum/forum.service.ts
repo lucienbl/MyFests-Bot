@@ -56,4 +56,21 @@ export class ForumService {
 
     return newLogDto;
   } 
+
+  async newAdminLog(newLogDto: NewLogDto): Promise<NewLogDto> {
+    const channel = <TextChannel>this._client.channels.resolve(process.env.FORUM_ADMIN_LOGS_CHANNEL_ID);
+    const user = this._client.users.resolve(newLogDto.discordId);
+
+    await channel.send(new MessageEmbed({
+      author: {
+        name: user.tag,
+        iconURL: user.displayAvatarURL(),
+      },
+      title: newLogDto.action,
+      description: newLogDto.description,
+      color: "#f52222"
+    }));
+
+    return newLogDto;
+  } 
 }
