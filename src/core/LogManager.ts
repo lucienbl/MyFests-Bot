@@ -118,7 +118,7 @@ class LogManager {
         name: message.member.user.tag,
         iconURL: message.member.user.displayAvatarURL(),
       },
-      description: `\`\`\`${message.toString()}\`\`\``,
+      description: `Message deleted : \`\`\`${message.toString()}\`\`\``,
       timestamp: Date.now()
     }));
   };
