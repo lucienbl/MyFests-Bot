@@ -18,7 +18,7 @@
 import { Injectable } from '@nestjs/common';
 import { Client, TextChannel, MessageEmbed } from 'discord.js';
 import { container } from 'tsyringe';
-import { NewThreadDto } from './forum.dto';
+import { NewThreadDto, NewLogDto } from './forum.dto';
 
 @Injectable()
 export class ForumService {
@@ -38,5 +38,22 @@ export class ForumService {
     }).setThumbnail(newThreadDto.thumbnailUrl));
 
     return newThreadDto;
+  } 
+
+  async newLog(newLogDto: NewLogDto): Promise<NewLogDto> {
+    const channel = <TextChannel>this._client.channels.resolve(process.env.FORUM_LOGS_CHANNEL_ID);
+    const user = this._client.users.resolve(newLogDto.discordId);
+
+    await channel.send(new MessageEmbed({
+      author: {
+        name: user.tag,
+        iconURL: user.displayAvatarURL(),
+      },
+      title: newLogDto.action,
+      description: newLogDto.description,
+      color: "#f52222"
+    }));
+
+    return newLogDto;
   } 
 }

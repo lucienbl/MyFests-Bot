@@ -39,3 +39,17 @@ export class NewThreadDto {
   @ApiProperty()
   color?: string = "#fcc203";
 }
+
+/**
+ * New log
+ */
+export class NewLogDto {
+  @ApiProperty()
+  discordId: string;
+
+  @ApiProperty()
+  action: string;
+
+  @ApiProperty()
+  description: string;
+}
