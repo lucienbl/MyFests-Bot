@@ -49,7 +49,10 @@ class LogManager {
 
   private _onGuildMemberAdd = (member: GuildMember) => {
     return this._send(new MessageEmbed({
-      title: "Guild Member Add",
+      author: {
+        name: member.user.tag,
+        iconURL: member.user.displayAvatarURL(),
+      },
       description: `${member.user.username} joined the guild !`,
       timestamp: Date.now()
     }));
@@ -57,33 +60,41 @@ class LogManager {
 
   private _onGuildMemberRemove = (member: GuildMember) => {
     return this._send(new MessageEmbed({
-      title: "Guild Member Remove",
+      author: {
+        name: member.user.tag,
+        iconURL: member.user.displayAvatarURL(),
+      },
       description: `${member.user.username} left the guild !`,
       timestamp: Date.now()
     }));
   };
 
   private _onGuildMemberUpdate = (previousGuildMember: GuildMember, currentGuildMember: GuildMember) => {
-    return this._send(new MessageEmbed({
-      title: "Guild Member Update",
-      fields: [
-        {
-          name: 'Now',
-          value: '```json\n' + JSON.stringify(currentGuildMember.toJSON(), null, 2) + '```'
+    const roleDiff = previousGuildMember.roles.cache.difference(currentGuildMember.roles.cache).first();
+    let description: string;
+    if (roleDiff) {
+      if (previousGuildMember.roles.cache.array().includes(roleDiff)) description = `Role <@&${roleDiff.id}> removed from <@!${previousGuildMember.id}>!`;
+      if (currentGuildMember.roles.cache.array().includes(roleDiff)) description = `Role <@&${roleDiff.id}> added to <@!${previousGuildMember.id}>!`;
+
+      return this._send(new MessageEmbed({
+        author: {
+          name: previousGuildMember.user.tag,
+          iconURL: previousGuildMember.user.displayAvatarURL(),
         },
-        {
-          name: 'Previous',
-          value: '```json\n' + JSON.stringify(previousGuildMember.toJSON(), null, 2) + '```'
-        }
-      ],
-      timestamp: Date.now()
-    }));
+        description,
+        timestamp: Date.now()
+      }));
+    }
   };
 
   private _onMessageUpdate = (previousMessage: Message, currentMessage: Message) => {
-    if (!currentMessage.toString() || !previousMessage.toString()) return null;
+    if (!currentMessage.toString() || !previousMessage.toString() || (currentMessage.toString() && previousMessage.toString())) return null;
     return this._send(new MessageEmbed({
-      title: "Message Update",
+      author: {
+        name: currentMessage.member.user.tag,
+        iconURL: currentMessage.member.user.displayAvatarURL(),
+      },
+      description: "Message Edited",
       fields: [
         {
           name: 'Now',
@@ -99,8 +110,12 @@ class LogManager {
   }
 
   private _onMessageDelete = (message: Message) => {
+    if (!message.toString()) return null;
     return this._send(new MessageEmbed({
-      title: "Message Delete",
+      author: {
+        name: message.member.user.tag,
+        iconURL: message.member.user.displayAvatarURL(),
+      },
       description: `\`\`\`${message.toString()}\`\`\``,
       timestamp: Date.now()
     }));
@@ -112,7 +127,7 @@ class LogManager {
 
   private _onRoleCreate = (role: Role) => {
     return this._send(new MessageEmbed({
-      title: "Role Create",
+      title: "Role Created",
       description: role.toString(),
       timestamp: Date.now()
     }));
@@ -120,7 +135,7 @@ class LogManager {
 
   private _onRoleDelete = (role: Role) => {
     return this._send(new MessageEmbed({
-      title: "Role Delete",
+      title: "Role Deleted",
       description: role.toString(),
       timestamp: Date.now()
     }));
@@ -128,7 +143,7 @@ class LogManager {
 
   private _onRoleUpdate = (previousRole: Role, currentRole: Role) => {
     return this._send(new MessageEmbed({
-      title: "Role Update",
+      title: "Role Updated",
       fields: [
         {
           name: 'Now',
@@ -145,7 +160,7 @@ class LogManager {
 
   private _onChannelCreate = (channel: Channel) => {
     return this._send(new MessageEmbed({
-      title: "Channel Create",
+      title: "Channel Created",
       description: channel.toString(),
       timestamp: Date.now()
     }));
@@ -153,7 +168,7 @@ class LogManager {
 
   private _onChannelDelete = (channel: Channel) => {
     return this._send(new MessageEmbed({
-      title: "Channel Delete",
+      title: "Channel Deleted",
       description: channel.toString(),
       timestamp: Date.now()
     }));
@@ -161,25 +176,27 @@ class LogManager {
 
   private _onGuildBanAdd = (_guild: Guild, user: User) => {
     return this._send(new MessageEmbed({
-      title: "Guild Ban Add",
-      description: user.toString(),
+      author: {
+        name: user.tag,
+        iconURL: user.displayAvatarURL(),
+      },
+      description: `<@!${user.id}> banned from the server !`,
       timestamp: Date.now()
     }));
   };
 
   private _onVoiceStateUpdate = (previousVoiceState: VoiceState, currentVoiceState: VoiceState) => {
+    let description: string;
+    if (previousVoiceState.channelID && !currentVoiceState.channelID) description = `<@!${currentVoiceState.member.id}> left the voice channel ${previousVoiceState.channel.name} !`;
+    if (!previousVoiceState.channelID && currentVoiceState.channelID) description = `<@!${currentVoiceState.member.id}> joined the voice channel ${previousVoiceState.channel.name} !`;
+    if (!description) return null;
+    
     return this._send(new MessageEmbed({
-      title: "Voice State Update",
-      fields: [
-        {
-          name: 'Now',
-          value: '```json\n' + JSON.stringify(previousVoiceState.toJSON(), null, 2) + '```'
-        },
-        {
-          name: 'Previous',
-          value: '```json\n' + JSON.stringify(currentVoiceState.toJSON(), null, 2) + '```'
-        }
-      ],
+      author: {
+        name: currentVoiceState.member.user.tag,
+        iconURL: currentVoiceState.member.user.displayAvatarURL(),
+      },
+      description,
       timestamp: Date.now()
     }));
   };
