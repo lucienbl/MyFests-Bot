@@ -19,7 +19,7 @@ import { Controller, Post, UseGuards, Body } from '@nestjs/common';
 import { ApiTags, ApiBasicAuth, ApiResponse } from '@nestjs/swagger';
 import { ForumService } from './forum.service';
 import { AuthGuard } from '../auth.guard';
-import { NewThreadDto, NewLogDto } from './forum.dto';
+import { NewThreadDto, NewLogDto, NewCfhDto } from './forum.dto';
 
 @ApiTags("Forum")
 @ApiBasicAuth()
@@ -47,5 +47,11 @@ export class ForumController {
   @ApiResponse({ type: NewLogDto })
   newAdminLog(@Body() newLogDto: NewLogDto): Promise<NewLogDto> {
     return this.forumService.newAdminLog(newLogDto);
+  }
+
+  @Post("cfh")
+  @ApiResponse({ type: NewCfhDto })
+  newCfh(@Body() newCfhDto: NewCfhDto): Promise<NewCfhDto> {
+    return this.forumService.newCfh(newCfhDto);
   }
 }

@@ -53,3 +53,17 @@ export class NewLogDto {
   @ApiProperty()
   description: string;
 }
+
+/**
+ * New cfh
+ */
+export class NewCfhDto {
+  @ApiProperty()
+  discordId: string;
+
+  @ApiProperty()
+  category: string;
+
+  @ApiProperty()
+  description: string;
+}
