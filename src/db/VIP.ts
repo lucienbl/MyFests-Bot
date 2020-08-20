@@ -15,18 +15,20 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import MuteCommand from "./MuteCommand";
-import UnmuteCommand from "./UnmuteCommand";
-import MutedCommand from "./MutedCommand";
-import AddVIPCommand from "./AddVIPCommand";
-import RemoveVIPCommand from "./RemoveVIPCommand";
-import ListVIPCommand from "./ListVIPCommand";
+import { Entity, Column, CreateDateColumn, PrimaryGeneratedColumn } from "typeorm";
 
-export {
-  MuteCommand,
-  UnmuteCommand,
-  MutedCommand,
-  AddVIPCommand,
-  RemoveVIPCommand,
-  ListVIPCommand
+@Entity()
+export default class VIP {
+
+    @PrimaryGeneratedColumn("uuid")
+    id: string;
+
+    @Column({ unique: true })
+    discordUserId: string;
+
+    @Column({ nullable: true })
+    untilDate: Date;
+
+    @CreateDateColumn()
+    createdAt: Date;
 }

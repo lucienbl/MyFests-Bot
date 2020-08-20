@@ -25,6 +25,7 @@ import GuildMemberAddDispatcher from "./GuildMemberAddDispatcher";
 import ApiClient from "./ApiClient";
 import MuteManager from "./MuteManager";
 import ChannelCreateDispatcher from "./ChannelCreateDispatcher";
+import VIPManager from "./VIPManager";
 
 export {
   MessageDispatcher,
@@ -36,5 +37,6 @@ export {
   GuildMemberAddDispatcher,
   ApiClient,
   MuteManager,
-  ChannelCreateDispatcher
+  ChannelCreateDispatcher,
+  VIPManager
 }

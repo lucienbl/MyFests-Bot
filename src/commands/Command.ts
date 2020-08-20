@@ -27,6 +27,7 @@ interface Argument {
 interface Options {
   command: string;
   args?: Argument[];
+  allowedRoles?: string[];
   description: string;
 }
 
@@ -80,7 +81,16 @@ class Command {
       }
     }
 
-    // TODO check if authorized
+    // Check if authorized
+    let isAllowed = false;
+    if (this._options.allowedRoles) {
+      for (const allowedRole of this._options.allowedRoles) {
+        if (this._message.member.roles.cache.find(role => role.id === allowedRole)) isAllowed = true;
+      }
+    } else {
+      isAllowed = true;
+    }
+    if (!isAllowed) throw new Error("Missing permissions. You cannot use this command !");
   
     return this.handler();
   }

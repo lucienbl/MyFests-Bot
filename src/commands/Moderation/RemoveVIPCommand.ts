@@ -15,33 +15,39 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import { Message } from 'discord.js';
-import { container } from 'tsyringe';
-import { Repository, Connection } from 'typeorm';
+import { Message, MessageEmbed } from 'discord.js';
 import Command from '../Command';
-import { ReactionRole } from '../../db';
+import { VIPManager } from '../../core';
 
-class ReactionRoleListCommand extends Command {
+class RemoveVIPCommand extends Command {
 
-  _reactionRolesRepository: Repository<ReactionRole>;
+  _vipManager: VIPManager;
 
   constructor(message: Message) {
     super(message, {
-      command: "reaction-role-list",
+      command: "remove-vip",
+      args: [
+        {
+          key: "user",
+          description: "The user to remove the VIP role.",
+          required: true
+        },
+      ],
       allowedRoles: [process.env.COMMUNITY_MODERATOR_ROLE_ID],
-      description: "Adds a reaction role entry."
+      description: "Removes the VIP role from a user."
     });
 
-    this._reactionRolesRepository = container.resolve(Connection).getRepository(ReactionRole);
+    this._vipManager = new VIPManager();
   }
 
   handler = async () => {
-    await this.message.delete();
-
-    const reactionRoles = await this._reactionRolesRepository.find();
-
-    await this.message.channel.send(reactionRoles.map(reactionRole => `• ${reactionRole.reactionEmoji} : ${reactionRole.messageId} (<@&${reactionRole.reactionRoleId}>)`).join("\n"));
+    await this._vipManager.removeVIP(this.message.mentions.members.first().id);
+    
+    await this.message.channel.send(new MessageEmbed({
+      title: "Done !",
+      description: `Successfully removed the VIP role from <@${this.message.mentions.members.first().id}>.`
+    }));
   }
 }
 
-export default ReactionRoleListCommand;
+export default RemoveVIPCommand;

@@ -18,7 +18,7 @@
 import { PingCommand } from "./Utils";
 import { AnnounceCommand } from "./Common";
 import { ReactionRoleAddCommand, ReactionRoleListCommand } from "./ReactionRoles";
-import { MuteCommand, UnmuteCommand, MutedCommand } from "./Moderation";
+import { MuteCommand, UnmuteCommand, MutedCommand, AddVIPCommand, RemoveVIPCommand, ListVIPCommand } from "./Moderation";
 
 export {
   PingCommand,
@@ -27,5 +27,8 @@ export {
   ReactionRoleListCommand,
   MuteCommand,
   UnmuteCommand,
-  MutedCommand
+  MutedCommand,
+  AddVIPCommand,
+  RemoveVIPCommand,
+  ListVIPCommand
 }

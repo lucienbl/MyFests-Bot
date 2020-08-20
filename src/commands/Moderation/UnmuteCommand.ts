@@ -33,6 +33,7 @@ class UnmuteCommand extends Command {
           required: true
         },
       ],
+      allowedRoles: [process.env.COMMUNITY_MODERATOR_ROLE_ID],
       description: "Unmute a user."
     });
 

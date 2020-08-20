@@ -17,8 +17,10 @@
 
 import ReactionRole from "./ReactionRole";
 import Mute from "./Mute";
+import VIP from "./VIP";
 
 export {
   ReactionRole,
-  Mute
+  Mute,
+  VIP
 }

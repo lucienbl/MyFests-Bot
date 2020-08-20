@@ -18,24 +18,20 @@
 import { Message, MessageEmbed } from 'discord.js';
 import * as moment from "moment";
 import Command from '../Command';
-import { MuteManager } from '../../core';
+import { VIPManager } from '../../core';
 
-class MuteCommand extends Command {
+class AddVIPCommand extends Command {
 
-  _muteManager: MuteManager;
+  _vipManager: VIPManager;
 
   constructor(message: Message) {
     super(message, {
-      command: "mute",
+      command: "add-vip",
       args: [
         {
           key: "user",
-          description: "The user to mute",
+          description: "The user to give the VIP role.",
           required: true
-        },
-        {
-          key: "reason",
-          description: "The reason of the mute (in seconds).",
         },
         {
           key: "duration",
@@ -43,10 +39,10 @@ class MuteCommand extends Command {
         }
       ],
       allowedRoles: [process.env.COMMUNITY_MODERATOR_ROLE_ID],
-      description: "Mute a user."
+      description: "Give a user the VIP role."
     });
 
-    this._muteManager = new MuteManager();
+    this._vipManager = new VIPManager();
   }
 
   handler = async () => {
@@ -57,13 +53,13 @@ class MuteCommand extends Command {
       endDate = moment().add(this.argument('duration').value, "m");
     }
 
-    await this._muteManager.mute(this.message.mentions.members.first().id, this.argument('reason').value, endDate);
+    await this._vipManager.addVIP(this.message.mentions.members.first().id, endDate);
 
     await this.message.channel.send(new MessageEmbed({
       title: "Done !",
-      description: `Successfully muted <@${this.message.mentions.members.first().id}>. ${endDate ? `He will be unmuted **${endDate.fromNow()}**` : `You will need to manually unmute him using the \`${process.env.BOT_PREFIX}unmute\` command`}.\n\n__Reason :__\`\`\`${this.argument('reason').value || "No reason"}\`\`\``
+      description: `Successfully gave <@${this.message.mentions.members.first().id}> the VIP role. ${endDate ? `The role will be removed **${endDate.fromNow()}**` : `You will need to manually remove the role using the \`${process.env.BOT_PREFIX}remove-vip\` command`}.`
     }));
   }
 }
 
-export default MuteCommand;
+export default AddVIPCommand;
