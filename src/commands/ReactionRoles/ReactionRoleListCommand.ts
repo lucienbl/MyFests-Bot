@@ -28,7 +28,7 @@ class ReactionRoleListCommand extends Command {
   constructor(message: Message) {
     super(message, {
       command: "reaction-role-list",
-      allowedRoles: [process.env.COMMUNITY_MODERATOR_ROLE_ID],
+      allowedRoles: [process.env.MANAGEMENT_ROLE_ID],
       description: "Adds a reaction role entry."
     });
 

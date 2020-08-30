@@ -34,6 +34,7 @@ class AnnounceCommand extends Command {
           required: true
         }
       ],
+      allowedRoles: [process.env.MANAGEMENT_ROLE_ID],
       description: "Announces a message in a specified channel."
     })
   }
