@@ -42,6 +42,7 @@ export class CommunityService {
 
   async newEvent(newEventDto: NewEventDto): Promise<NewEventDto> {
     const channel = <TextChannel>this._client.channels.resolve(process.env.COMMUNITY_UPDATES_CHANNEL_ID);
+    await channel.send("@here");
     await channel.send(new MessageEmbed({
       title: `NEW EVENT: ${newEventDto.parent} > ${newEventDto.title}`,
       description: `By ${newEventDto.author}\n\n${newEventDto.link}`,
