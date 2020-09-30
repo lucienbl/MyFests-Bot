@@ -33,14 +33,14 @@ class MemberVerificationManager {
 
   private _verify = async (isVerified: boolean, member: GuildMember) => {
     if (isVerified) {
-      await member.roles.remove(process.env.UNVERIFIED_ROLE_ID);
+      await member.roles.add(process.env.VERIFIED_ROLE_ID);
       this._send(new MessageEmbed({
         title: "New Rise To Fame!",
         description: `Please congratulate <@${member.id}> on verifying their discord! 💖`,
         color: "#FF8800"
       }).setFooter('Want to join the staff team? Check out #job-rallying!').setThumbnail(member.user.displayAvatarURL()));
     } else {
-      await member.roles.add(process.env.UNVERIFIED_ROLE_ID);
+      await member.roles.remove(process.env.VERIFIED_ROLE_ID);
     }
   }
 }
