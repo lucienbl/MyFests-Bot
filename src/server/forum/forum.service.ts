@@ -77,7 +77,7 @@ export class ForumService {
   async newCfh(newCfhDto: NewCfhDto): Promise<NewCfhDto> {
     const channel = <TextChannel>this._client.channels.resolve(process.env.FORUM_CFH_LOGS_CHANNEL_ID);
 
-    await channel.send(`<@&${process.env.COMMUNITY_MODERATOR_ROLE_ID}>, **A New Call for Help has been submitted by <@!${newCfhDto.discordId}> (Category: ${newCfhDto.category})**\n__Description :__\`\`\`${newCfhDto.description}\`\`\`\n\nPlease immediately action this Call for Help.`);
+    await channel.send(`<@&${process.env.DISCORD_MODERATOR_ROLE_ID}>, **A New Call for Help has been submitted by <@!${newCfhDto.discordId}> (Category: ${newCfhDto.category})**\n__Description :__\`\`\`${newCfhDto.description}\`\`\`\n\nPlease immediately action this Call for Help.`);
 
     return newCfhDto;
   } 

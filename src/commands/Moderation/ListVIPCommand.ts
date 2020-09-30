@@ -27,7 +27,11 @@ class ListVIPCommand extends Command {
   constructor(message: Message) {
     super(message, {
       command: "list-vip",
-      allowedRoles: [process.env.MANAGEMENT_ROLE_ID],
+      allowedRoles: [
+        process.env.MANAGEMENT_ROLE_ID,
+        process.env.DISCORD_MODERATOR_ROLE_ID,
+        process.env.ADMINISTRATOR_ROLE_ID
+      ],
       description: "List the VIP users."
     });
 

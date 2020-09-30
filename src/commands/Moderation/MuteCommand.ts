@@ -42,7 +42,11 @@ class MuteCommand extends Command {
           description: "How much time? (minutes)",
         }
       ],
-      allowedRoles: [process.env.MANAGEMENT_ROLE_ID],
+      allowedRoles: [
+        process.env.MANAGEMENT_ROLE_ID,
+        process.env.DISCORD_MODERATOR_ROLE_ID,
+        process.env.ADMINISTRATOR_ROLE_ID
+      ],
       description: "Mute a user."
     });
 

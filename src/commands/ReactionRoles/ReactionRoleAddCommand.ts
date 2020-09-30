@@ -45,7 +45,11 @@ class ReactionRoleAddCommand extends Command {
           required: true
         }
       ],
-      allowedRoles: [process.env.MANAGEMENT_ROLE_ID],
+      allowedRoles: [
+        process.env.MANAGEMENT_ROLE_ID,
+        process.env.DISCORD_MODERATOR_ROLE_ID,
+        process.env.ADMINISTRATOR_ROLE_ID
+      ],
       description: "Adds a reaction role entry."
     });
 
