@@ -65,7 +65,7 @@ class MuteCommand extends Command {
 
     await this.message.channel.send(new MessageEmbed({
       title: "Done !",
-      description: `Successfully muted <@${this.message.mentions.members.first().id}>. ${endDate ? `He will be unmuted **${endDate.fromNow()}**` : `You will need to manually unmute him using the \`${process.env.BOT_PREFIX}unmute\` command`}.\n\n__Reason :__\`\`\`${this.argument('reason').value || "No reason"}\`\`\``
+      description: `Successfully muted <@${this.message.mentions.members.first().id}>. ${endDate ? `They will be unmuted **${endDate.fromNow()}**` : `You will need to manually unmute him using the \`${process.env.BOT_PREFIX}unmute\` command`}.\n\n__Reason :__\`\`\`${this.argument('reason').value || "No reason"}\`\`\``
     }));
   }
 }
