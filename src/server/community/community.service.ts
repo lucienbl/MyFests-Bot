@@ -18,7 +18,7 @@
 import { Injectable } from '@nestjs/common';
 import { Client, TextChannel, MessageEmbed } from 'discord.js';
 import { container } from 'tsyringe';
-import { NewMediaDto, NewEventDto, NewRadioDto } from './community.dto';
+import { NewMediaDto, NewEventDto, NewRadioDto, NewFurniDto } from './community.dto';
 
 @Injectable()
 export class CommunityService {
