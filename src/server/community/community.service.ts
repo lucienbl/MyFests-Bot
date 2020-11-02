@@ -64,7 +64,7 @@ export class CommunityService {
   } 
   
    async newFurni(newFurniDto: NewFurniDto): Promise<NewFurniDto> {
-    const channel = <TextChannel>this._client.channels.resolve(process.env.COMMUNITY_UPDATES_CHANNEL_ID);
+    const channel = <TextChannel>this._client.channels.resolve(process.env.MARKETPLACE_CHANNEL_ID);
     await channel.send(new MessageEmbed({
       title: `NEW MARKETPLACE TRADE: ${newFurniDto.furni}`,
       description: `Value ${newFurniDto.value}\n\n${newFurniDto.link}`
