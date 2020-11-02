@@ -51,7 +51,7 @@ export class CommunityController {
   
   @Post("furni")
   @ApiResponse({ type: NewFurniDto })
-  newFurni(@Body() newRadioDto: NewFurniDto): Promise<NewFurniDto> {
-    return this.communityService.newFurni(NewFurniDto);
+  newFurni(@Body() newFurniDto: NewFurniDto): Promise<NewFurniDto> {
+    return this.communityService.newFurni(newFurniDto);
   }
 }
