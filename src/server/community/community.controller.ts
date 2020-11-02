@@ -48,4 +48,10 @@ export class CommunityController {
   newRadio(@Body() newRadioDto: NewRadioDto): Promise<NewRadioDto> {
     return this.communityService.newRadio(newRadioDto);
   }
+  
+  @Post("furni")
+  @ApiResponse({ type: NewFurniDto })
+  newFurni(@Body() newRadioDto: NewFurniDto): Promise<NewFurniDto> {
+    return this.communityService.newFurni(NewFurniDto);
+  }
 }
