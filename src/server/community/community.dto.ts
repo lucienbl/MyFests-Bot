@@ -82,3 +82,17 @@ export class NewRadioDto {
   @ApiProperty()
   color?: string = "#fcc203";
 }
+export class NewFurniDto {
+  @ApiProperty()
+  furni: string;
+
+  @ApiProperty()
+  value: string;
+
+  @ApiProperty()
+  link: string;
+
+  @ApiProperty()
+  thumbnailUrl: string;
+
+}
