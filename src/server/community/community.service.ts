@@ -62,4 +62,14 @@ export class CommunityService {
 
     return newRadioDto;
   } 
+  
+   async newFurni(newFurniDto: NewFurniDto): Promise<NewFurniDto> {
+    const channel = <TextChannel>this._client.channels.resolve(process.env.COMMUNITY_UPDATES_CHANNEL_ID);
+    await channel.send(new MessageEmbed({
+      title: `NEW MARKETPLACE TRADE: ${newFurniDto.furni}`,
+      description: `Value ${newFurniDto.value}\n\n${newFurniDto.link}`
+    }).setThumbnail(newRadioDto.thumbnailUrl));
+
+    return newFurniDto;
+  } 
 }
