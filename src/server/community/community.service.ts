@@ -68,7 +68,7 @@ export class CommunityService {
     await channel.send(new MessageEmbed({
       title: `NEW MARKETPLACE TRADE: ${newFurniDto.furni}`,
       description: `Value ${newFurniDto.value}\n\n${newFurniDto.link}`
-    }).setThumbnail(newRadioDto.thumbnailUrl));
+    }).setThumbnail(newFurniDto.thumbnailUrl));
 
     return newFurniDto;
   } 
