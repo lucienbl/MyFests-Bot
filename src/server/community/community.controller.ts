@@ -18,7 +18,7 @@
 import { Controller, UseGuards, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiBasicAuth, ApiResponse } from '@nestjs/swagger';
 import { AuthGuard } from '../auth.guard';
-import { NewMediaDto, NewEventDto, NewRadioDto } from './community.dto';
+import { NewMediaDto, NewEventDto, NewRadioDto, NewFurniDto } from './community.dto';
 import { CommunityService } from './community.service';
 
 @ApiTags("Community")
