@@ -21,6 +21,7 @@ import MutedCommand from "./MutedCommand";
 import AddVIPCommand from "./AddVIPCommand";
 import RemoveVIPCommand from "./RemoveVIPCommand";
 import ListVIPCommand from "./ListVIPCommand";
+import PurgeCommand from "./PurgeCommand";
 
 export {
   MuteCommand,
@@ -28,5 +29,6 @@ export {
   MutedCommand,
   AddVIPCommand,
   RemoveVIPCommand,
-  ListVIPCommand
+  ListVIPCommand,
+  PurgeCommand
 }
