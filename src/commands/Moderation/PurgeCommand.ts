@@ -6,7 +6,6 @@
  */
 
 import { Message, MessageEmbed } from 'discord.js';
-import * as moment from "moment";
 import Command from '../Command';
 
 class PurgeCommand extends Command {
