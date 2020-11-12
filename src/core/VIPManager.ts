@@ -51,7 +51,9 @@ class VIPManager {
   public removeVIP = async (discordUserId: string) => {
     const guild = this._client.guilds.resolve(process.env.MAIN_GUILD_ID);
     const member = guild.members.resolve(discordUserId);
-    await member.roles.remove(process.env.VIP_ROLE_ID);
+    if (member) {
+      await member.roles.remove(process.env.VIP_ROLE_ID);
+    }
     const vipMember = await this._vipRepository.findOne({ where: { discordUserId } });
     await this._vipRepository.remove(vipMember);
   }
