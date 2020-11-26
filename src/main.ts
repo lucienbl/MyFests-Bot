@@ -20,7 +20,7 @@ import "reflect-metadata";
 import { container } from 'tsyringe';
 import { createConnection, Connection } from "typeorm";
 import { Logger } from "./utils";
-import { MessageDispatcher, MessageReactionAddDispatcher, MessageReactionRemoveDispatcher, ReadyDispatcher, LogManager, GuildMemberAddDispatcher, MuteManager, ChannelCreateDispatcher, VIPManager } from './core';
+import { MessageDispatcher, MessageReactionAddDispatcher, MessageReactionRemoveDispatcher, ReadyDispatcher, /* LogManager */, GuildMemberAddDispatcher, MuteManager, ChannelCreateDispatcher, VIPManager } from './core';
 import { Server } from "./server";
 import { ReactionRole, Mute, VIP } from './db';
 
