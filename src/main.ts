@@ -60,7 +60,7 @@ createConnection({
   container.registerInstance<Connection>(Connection, connection);
 
   // start managers
-  LogManager.start();
+  // LogManager.start();
   MuteManager.start();
   VIPManager.start();
 
